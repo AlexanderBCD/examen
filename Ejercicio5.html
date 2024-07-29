@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordenar por Propiedad</title>
+    <link rel="stylesheet" href="ejercicio5.css">
+
+   
+</head>
+<body>
+    <div class="container">
+        <h1>Ordenar por Propiedad</h1>
+        <input type="text" id="propiedad" placeholder="Nombre de la propiedad">
+        <button id="ordenar">Ordenar</button>
+        <h2>Objetos</h2>
+        <ul id="lista-objetos">
+            <li>Nombre: Juan, Edad: 25</li>
+            <li>Nombre: Ana, Edad: 22</li>
+            <li>Nombre: Ale, Edad: 32</li>
+            <li>Nombre: Luis, Edad: 28</li>
+        </ul>
+    </div>
+    <script>
+        document.getElementById('ordenar').addEventListener('click', () => {
+            const propiedad = document.getElementById('propiedad').value.toLowerCase();
+            const objetos = [
+                { nombre: 'Juan', edad: 25 },
+                { nombre: 'Ana', edad: 22 },
+                { nombre: 'Ale', edad: 32},
+                { nombre: 'Luis', edad: 28 },
+            ];
+            const objetosOrdenados = ordenarPorPropiedad(objetos, propiedad);
+            mostrarObjetos(objetosOrdenados);
+        });
+
+        function ordenarPorPropiedad(arr, propiedad) {
+            return arr.slice().sort((a, b) => {
+                if (a[propiedad] < b[propiedad]) return -1;
+                if (a[propiedad] > b[propiedad]) return 1;
+                return 0;
+            });
+        }
+
+        function mostrarObjetos(objetos) {
+            const lista = document.getElementById('lista-objetos');
+            lista.innerHTML = '';
+            objetos.forEach(obj => {
+                const li = document.createElement('li');
+                li.textContent = `Nombre: ${obj.nombre}, Edad: ${obj.edad}`;
+                lista.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>
+
